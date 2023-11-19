@@ -1,4 +1,4 @@
-![360P](360P.png)
+![360P](c360.png)
 
 # 360Passenger
 Project for Hacked Beta 2023 by Chetan Tyagi.
