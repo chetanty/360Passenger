@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>360 Image Viewer</title>
+    <title>360Passenger at Amsterdam</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
+    <link rel="icon" type="image/png" href="assets/CT29.png">
+
 </head>
 <body>
     <div style="font-family: 'Orbitron', sans-serif; font-weight: bold; background-color: #f0f0f0; color: rgb(0, 0, 0); padding: 10px; text-align: center; font-size: 24px; position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; z-index: 10;">
@@ -18,14 +20,18 @@
         <div style="padding-right: 10px;">
             <button onclick="toggleInfo()" style="border: none; background-color: inherit; font-family: 'Orbitron', sans-serif; font-size: 24px; color: rgb(0, 0, 0); cursor: pointer;font-weight: bold;">Info</button>
         </div>
+        <div style="padding-right: 10px;">
+            <button onclick="toggleExtra()" style="border: none; background-color: inherit; font-family: 'Orbitron', sans-serif; font-size: 24px; color: rgb(0, 0, 0); cursor: pointer;font-weight: bold;">Extra</button>
+        </div>
     </div>
 
     <div id="infoOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 9;"></div>
+    <div id="infoOverlay2" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 9;"></div>
 
     <a-scene vr-mode-ui="enabled: true">
         <!-- Preload assets -->
         <a-assets>
-            <img id="amsterdam" src="amsterdam.png">
+            <img id="amsterdam" src="assets/amsterdam.png">
         </a-assets>
 
         <!-- Wrap the scene in an entity for better structure -->
@@ -45,124 +51,8 @@
                 </a-entity>
             </a-globe>
         </a-entity>
-        <script>
-            document.getElementById('scene').addEventListener('loaded', function () {
-                // Wait for a short delay to ensure proper initialization
-                setTimeout(function () {
-                    // Get the camera element
-                    var camera = document.querySelector('[camera]');
-        
-                    // Rotate the camera to look at the opposite side
-                    camera.components['look-controls'].yawObject.rotation.y += Math.PI;
-                }, 100);
-            });
-        
-            function toggleInfo() {
-                var infoOverlay = document.getElementById('infoOverlay');
-                if (infoOverlay.style.display === 'none') {
-                    infoOverlay.style.display = 'block';
-        
-                    // Add an image element to the infoOverlay
-                    var imageElement = document.createElement('img');
-                    imageElement.src = 'ams_map1.png';
-                    imageElement.style.width = '30%'; // Adjust the width as needed
-                    imageElement.style.height = 'auto';
-                    imageElement.style.display = 'block';
-                    imageElement.style.margin = '0 auto'; // Center the image horizontally
-                    imageElement.style.position = 'absolute';
-                    imageElement.style.top = '-5%'; // Adjust the top position as needed
-                    imageElement.style.right = '5%'; // Adjust the top position as needed
-        
-                    imageElement.style.transform = 'translateY(50%)'; // Move down by 50% of its height
-                    infoOverlay.appendChild(imageElement);
-        
-                    // Add a text element to the infoOverlay
-                    var helloText = document.createElement('div');
-                    helloText.innerHTML = 'Amsterdam in 1923 whispered tales of gaslit canals and a bohemian spirit. Cobblestone alleys painted a picturesque scene, and the city\'s intimate spaces echoed with timeless traditions.';
-                    helloText.style.color = 'white';
-                    helloText.style.fontSize = '24px';
-                    helloText.style.fontFamily = 'Orbitron, sans-serif';
-                    helloText.style.position = 'absolute';
-                    helloText.style.top = '70px'; // Adjust the top position as needed
-                    helloText.style.left = '10px'; // Adjust the left position as needed
-                    infoOverlay.appendChild(helloText);
-        
-                    var helloText2 = document.createElement('div');
-                    helloText2.innerHTML = 'In 1923, the Netherlands enjoyed a period of economic<br> stability following the aftermath of World War I.<br>Queen Wilhelmina\'s reign provided a steady hand in<br> guiding the country, contributing to a relatively calm<br> and prosperous atmosphere.';
-                    helloText2.style.color = 'white';
-                    helloText2.style.fontSize = '24px';
-                    helloText2.style.fontFamily = 'Orbitron, sans-serif';
-                    helloText2.style.position = 'absolute';
-                    helloText2.style.top = '200px'; // Adjust the top position as needed
-                    helloText2.style.left = '10px'; // Adjust the left position as needed
-                    infoOverlay.appendChild(helloText2);
-        
-                    // Add 'nedemb.png' image at the bottom
-                    var nedembImage = document.createElement('img');
-                    nedembImage.src = 'nedemb.png';
-                    nedembImage.style.width = '15%'; // Adjust the width as needed
-                    nedembImage.style.height = 'auto';
-                    nedembImage.style.display = 'block';
-                    nedembImage.style.top = '350px'; // Adjust the top position as needed
-                    nedembImage.style.left = '20px'; // Adjust the left position as needed
-                    nedembImage.style.position = 'absolute';
-                    nedembImage.style.bottom = '0'; // Place at the bottom
-                    infoOverlay.appendChild(nedembImage);
-        
-                    // Add 'nedcoin.png' image beside 'nedemb.png'
-                    var nedcoinImage = document.createElement('img');
-                    nedcoinImage.src = 'nedcoin.png';
-                    nedcoinImage.style.width = '15%'; // Adjust the width as needed
-                    nedcoinImage.style.height = 'auto';
-                    nedcoinImage.style.display = 'block';
-                    nedcoinImage.style.top = '370px'; // Adjust the top position as needed
-                    nedcoinImage.style.left = '280px'; // Adjust the left position as needed
-                    nedcoinImage.style.position = 'absolute';
-                    nedcoinImage.style.bottom = '0'; // Place at the bottom
-                    infoOverlay.appendChild(nedcoinImage);
-        
-                    // Add 'nedflag.png' image beside 'nedcoin.png'
-                    var nedflagImage = document.createElement('img');
-                    nedflagImage.src = 'nedflag.png';
-                    nedflagImage.style.width = '15%'; // Adjust the width as needed
-                    nedflagImage.style.height = 'auto';
-                    nedflagImage.style.display = 'block';
-                    nedflagImage.style.top = '390px'; // Adjust the top position as needed
-                    nedflagImage.style.left = '540px'; // Adjust the left position as needed
-                    nedflagImage.style.position = 'absolute';
-                    nedflagImage.style.bottom = '0'; // Place at the bottom
-                    infoOverlay.appendChild(nedflagImage);
-                } else {
-                    infoOverlay.style.display = 'none';
-        
-                    // Remove the image and text elements when hiding the overlay
-                    var imageElement = infoOverlay.querySelector('img');
-                    var helloText = infoOverlay.querySelector('div');
-                    if (imageElement) {
-                        infoOverlay.removeChild(imageElement);
-                    }
-                    if (helloText) {
-                        infoOverlay.removeChild(helloText);
-                    }
-        
-                    // Remove the additional images
-                    var nedembImage = infoOverlay.querySelector('img[src="nedemb.png"]');
-                    if (nedembImage) {
-                        infoOverlay.removeChild(nedembImage);
-                    }
-        
-                    var nedcoinImage = infoOverlay.querySelector('img[src="nedcoin.png"]');
-                    if (nedcoinImage) {
-                        infoOverlay.removeChild(nedcoinImage);
-                    }
-        
-                    var nedflagImage = infoOverlay.querySelector('img[src="nedflag.png"]');
-                    if (nedflagImage) {
-                        infoOverlay.removeChild(nedflagImage);
-                    }
-                }
-            }
-        </script>
+        <script src="scripts/script_four.js"></script>
+
         
         
         
