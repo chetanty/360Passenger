@@ -22,27 +22,155 @@
 
     <div id="infoOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 9;"></div>
 
-    <a-scene vr-mode-ui="enabled: false" id="scene">
-        <a-sky src="montreal.png" rotation="0 90 0"></a-sky>
-        <a-camera look-controls="reverseMouseDrag: true"></a-camera>
+    <a-scene vr-mode-ui="enabled: true">
+        <!-- Preload assets -->
+        <a-assets>
+            <img id="montreal" src="montreal.png">
+        </a-assets>
 
+        <!-- Wrap the scene in an entity for better structure -->
+        <a-entity>
+            <!-- Set up the sky using the preloaded image -->
+            <a-sky src="#montreal" rotation="0 90 0"></a-sky>
+
+            <!-- Set up the camera for VR -->
+            <a-camera position="0 1.6 0" user-height="1.6" look-controls="reverseMouseDrag: true"></a-camera>
+
+            <!-- Add a 3D Earth model with a marker for London -->
+            <a-globe radius="1" position="0 1 0" z-IN>
+                <a-entity
+                    position="0.5 0.1 -0.2"
+                    rotation="0 45 0"
+                    text="value: Montreal; align: center; color: white; wrapCount: 10;">
+                </a-entity>
+            </a-globe>
+        </a-entity>
         <script>
             document.getElementById('scene').addEventListener('loaded', function () {
                 // Wait for a short delay to ensure proper initialization
                 setTimeout(function () {
                     // Get the camera element
                     var camera = document.querySelector('[camera]');
-
+        
                     // Rotate the camera to look at the opposite side
                     camera.components['look-controls'].yawObject.rotation.y += Math.PI;
                 }, 100);
             });
-
+        
             function toggleInfo() {
                 var infoOverlay = document.getElementById('infoOverlay');
-                infoOverlay.style.display = infoOverlay.style.display === 'none' ? 'block' : 'none';
+                if (infoOverlay.style.display === 'none') {
+                    infoOverlay.style.display = 'block';
+        
+                    // Add an image element to the infoOverlay
+                    var imageElement = document.createElement('img');
+                    imageElement.src = 'mon_map.png';
+                    imageElement.style.width = '30%'; // Adjust the width as needed
+                    imageElement.style.height = 'auto';
+                    imageElement.style.display = 'block';
+                    imageElement.style.margin = '0 auto'; // Center the image horizontally
+                    imageElement.style.position = 'absolute';
+                    imageElement.style.top = '5%'; // Adjust the top position as needed
+                    imageElement.style.right = '5%'; // Adjust the top position as needed
+        
+                    imageElement.style.transform = 'translateY(50%)'; // Move down by 50% of its height
+                    infoOverlay.appendChild(imageElement);
+        
+                    // Add a text element to the infoOverlay
+                    var helloText = document.createElement('div');
+                    helloText.innerHTML = 'In 1923, Montreal\'s streets whispered tales of cultural richness and dynamic city life. The urban thoroughfares echoed the vibrancy of the time, where diverse communities converged amid a backdrop of evolving societal narratives and the city\'s unique historical rhythm.';
+                    helloText.style.color = 'white';
+                    helloText.style.fontSize = '24px';
+                    helloText.style.fontFamily = 'Orbitron, sans-serif';
+                    helloText.style.position = 'absolute';
+                    helloText.style.top = '70px'; // Adjust the top position as needed
+                    helloText.style.left = '10px'; // Adjust the left position as needed
+                    infoOverlay.appendChild(helloText);
+        
+                    var helloText2 = document.createElement('div');
+                    helloText2.innerHTML = 'In 1923, Montreal thrived with a vibrant cultural tapestry<br> and significant societal moments. The city\'s pulse reflected<br> a dynamic blend of cultural richness, societal evolution,<br> and noteworthy events, shaping its unique narrative.';
+                    helloText2.style.color = 'white';
+                    helloText2.style.fontSize = '24px';
+                    helloText2.style.fontFamily = 'Orbitron, sans-serif';
+                    helloText2.style.position = 'absolute';
+                    helloText2.style.top = '200px'; // Adjust the top position as needed
+                    helloText2.style.left = '10px'; // Adjust the left position as needed
+                    infoOverlay.appendChild(helloText2);
+        
+                    // Add 'nedemb.png' image at the bottom
+                    var monembImage = document.createElement('img');
+                    monembImage.src = 'monemb.png';
+                    monembImage.style.width = '13%'; // Adjust the width as needed
+                    monembImage.style.height = 'auto';
+                    monembImage.style.display = 'block';
+                    monembImage.style.top = '320px'; // Adjust the top position as needed
+                    monembImage.style.left = '20px'; // Adjust the left position as needed
+                    monembImage.style.position = 'absolute';
+                    monembImage.style.bottom = '0'; // Place at the bottom
+                    infoOverlay.appendChild(monembImage);
+        
+                    // Add 'nedcoin.png' image beside 'nedemb.png'
+                    var moncoinImage = document.createElement('img');
+                    moncoinImage.src = 'mon_coin.jpg';
+                    moncoinImage.style.width = '22%'; // Adjust the width as needed
+                    moncoinImage.style.height = 'auto';
+                    moncoinImage.style.display = 'block';
+                    moncoinImage.style.top = '380px'; // Adjust the top position as needed
+                    moncoinImage.style.left = '210px'; // Adjust the left position as needed
+                    moncoinImage.style.position = 'absolute';
+                    moncoinImage.style.bottom = '0'; // Place at the bottom
+                    infoOverlay.appendChild(moncoinImage);
+        
+                    // Add 'nedflag.png' image beside 'nedcoin.png'
+                    var monflagImage = document.createElement('img');
+                    monflagImage.src = 'monflag.png';
+                    monflagImage.style.width = '22%'; // Adjust the width as needed
+                    monflagImage.style.height = 'auto';
+                    monflagImage.style.display = 'block';
+                    monflagImage.style.top = '380px'; // Adjust the top position as needed
+                    monflagImage.style.left = '500px'; // Adjust the left position as needed
+                    monflagImage.style.position = 'absolute';
+                    monflagImage.style.bottom = '0'; // Place at the bottom
+                    infoOverlay.appendChild(monflagImage);
+                } else {
+                    infoOverlay.style.display = 'none';
+        
+                    // Remove the image and text elements when hiding the overlay
+                    var imageElement = infoOverlay.querySelector('img');
+                    var helloText = infoOverlay.querySelector('div');
+                    if (imageElement) {
+                        infoOverlay.removeChild(imageElement);
+                    }
+                    if (helloText) {
+                        infoOverlay.removeChild(helloText);
+                    }
+        
+                    // Remove the additional images
+                    var monembImage = infoOverlay.querySelector('img[src="monemb.png"]');
+                    if (monembImage) {
+                        infoOverlay.removeChild(monembImage);
+                    }
+        
+                    var moncoinImage = infoOverlay.querySelector('img[src="mon_coin.png"]');
+                    if (moncoinImage) {
+                        infoOverlay.removeChild(moncoinImage);
+                    }
+        
+                    var monflagImage = infoOverlay.querySelector('img[src="monflag.png"]');
+                    if (monflagImage) {
+                        infoOverlay.removeChild(monflagImage);
+                    }
+                }
             }
         </script>
+        
+        
+        
+        
+        
+        
+        
+        
     </a-scene>
 </body>
 </html>

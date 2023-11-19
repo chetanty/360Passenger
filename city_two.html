@@ -5,24 +5,172 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>360 Image Viewer</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
 </head>
 <body>
-    <a-scene vr-mode-ui="enabled: false" id="scene">
-        <a-sky src="sanfrancisco.png" rotation="0 90 0"></a-sky>
-        <a-camera look-controls="reverseMouseDrag: true"></a-camera>
+    <div style="font-family: 'Orbitron', sans-serif; font-weight: bold; background-color: #f0f0f0; color: rgb(0, 0, 0); padding: 10px; text-align: center; font-size: 24px; position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; z-index: 10;">
+        <div style="padding-left: 10px;">
+            <a href="index.html" style="text-decoration: none; color: inherit;">&lt; Back</a>
+        </div>
+        <div style="flex-grow: 1;">
+            You are in San Francisco, 1923
+        </div>
+        <div style="padding-right: 10px;">
+            <button onclick="toggleInfo()" style="border: none; background-color: inherit; font-family: 'Orbitron', sans-serif; font-size: 24px; color: rgb(0, 0, 0); cursor: pointer;font-weight: bold;">Info</button>
+        </div>
+    </div>
 
+    <div id="infoOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 9;"></div>
+
+    <a-scene vr-mode-ui="enabled: true">
+        <!-- Preload assets -->
+        <a-assets>
+            <img id="sanfrancisco" src="sanfrancisco.png">
+        </a-assets>
+
+        <!-- Wrap the scene in an entity for better structure -->
+        <a-entity>
+            <!-- Set up the sky using the preloaded image -->
+            <a-sky src="#sanfrancisco" rotation="0 90 0"></a-sky>
+
+            <!-- Set up the camera for VR -->
+            <a-camera position="0 1.6 0" user-height="1.6" look-controls="reverseMouseDrag: true"></a-camera>
+
+            <!-- Add a 3D Earth model with a marker for London -->
+            <a-globe radius="1" position="0 1 0" z-IN>
+                <a-entity
+                    position="0.5 0.1 -0.2"
+                    rotation="0 45 0"
+                    text="value: sanfrancisco; align: center; color: white; wrapCount: 10;">
+                </a-entity>
+            </a-globe>
+        </a-entity>
         <script>
             document.getElementById('scene').addEventListener('loaded', function () {
                 // Wait for a short delay to ensure proper initialization
                 setTimeout(function () {
                     // Get the camera element
                     var camera = document.querySelector('[camera]');
-
+        
                     // Rotate the camera to look at the opposite side
                     camera.components['look-controls'].yawObject.rotation.y += Math.PI;
                 }, 100);
             });
+        
+            function toggleInfo() {
+                var infoOverlay = document.getElementById('infoOverlay');
+                if (infoOverlay.style.display === 'none') {
+                    infoOverlay.style.display = 'block';
+        
+                    // Add an image element to the infoOverlay
+                    var imageElement = document.createElement('img');
+                    imageElement.src = 'usmap.png';
+                    imageElement.style.width = '30%'; // Adjust the width as needed
+                    imageElement.style.height = 'auto';
+                    imageElement.style.display = 'block';
+                    imageElement.style.margin = '0 auto'; // Center the image horizontally
+                    imageElement.style.position = 'absolute';
+                    imageElement.style.top = '-5%'; // Adjust the top position as needed
+                    imageElement.style.right = '5%'; // Adjust the top position as needed
+        
+                    imageElement.style.transform = 'translateY(50%)'; // Move down by 50% of its height
+                    infoOverlay.appendChild(imageElement);
+        
+                    // Add a text element to the infoOverlay
+                    var helloText = document.createElement('div');
+                    helloText.innerHTML = 'In 1923, San Francisco\'s streets radiated a dynamic energy, embodying a resilient spirit post-earthquake, characterized by a fusion of historic Victorian architecture, vibrant markets, and occasional glimpses of the latest Roaring Twenties fashion.';
+                    helloText.style.color = 'white';
+                    helloText.style.fontSize = '24px';
+                    helloText.style.fontFamily = 'Orbitron, sans-serif';
+                    helloText.style.position = 'absolute';
+                    helloText.style.top = '70px'; // Adjust the top position as needed
+                    helloText.style.left = '10px'; // Adjust the left position as needed
+                    infoOverlay.appendChild(helloText);
+        
+                    var helloText2 = document.createElement('div');
+                    helloText2.innerHTML = 'In 1923, San Francisco pulsated with a dynamic political<br> scene, marked by civic engagement and pivotal events.<br> The city\'s political heartbeat echoed tales of societal<br> progress and historic milestones in the United States.';
+                    helloText2.style.color = 'white';
+                    helloText2.style.fontSize = '24px';
+                    helloText2.style.fontFamily = 'Orbitron, sans-serif';
+                    helloText2.style.position = 'absolute';
+                    helloText2.style.top = '200px'; // Adjust the top position as needed
+                    helloText2.style.left = '10px'; // Adjust the left position as needed
+                    infoOverlay.appendChild(helloText2);
+        
+                    // Add 'nedemb.png' image at the bottom
+                    var usembImage = document.createElement('img');
+                    usembImage.src = 'usa_emb.png';
+                    usembImage.style.width = '15%'; // Adjust the width as needed
+                    usembImage.style.height = 'auto';
+                    usembImage.style.display = 'block';
+                    usembImage.style.top = '350px'; // Adjust the top position as needed
+                    usembImage.style.left = '20px'; // Adjust the left position as needed
+                    usembImage.style.position = 'absolute';
+                    usembImage.style.bottom = '0'; // Place at the bottom
+                    infoOverlay.appendChild(usembImage);
+        
+                    // Add 'nedcoin.png' image beside 'nedemb.png'
+                    var uscoinImage = document.createElement('img');
+                    uscoinImage.src = 'uscoin.png';
+                    uscoinImage.style.width = '20%'; // Adjust the width as needed
+                    uscoinImage.style.height = 'auto';
+                    uscoinImage.style.display = 'block';
+                    uscoinImage.style.top = '350px'; // Adjust the top position as needed
+                    uscoinImage.style.left = '280px'; // Adjust the left position as needed
+                    uscoinImage.style.position = 'absolute';
+                    uscoinImage.style.bottom = '0'; // Place at the bottom
+                    infoOverlay.appendChild(uscoinImage);
+        
+                    // Add 'nedflag.png' image beside 'nedcoin.png'
+                    var usflagImage = document.createElement('img');
+                    usflagImage.src = 'usflag.png';
+                    usflagImage.style.width = '18%'; // Adjust the width as needed
+                    usflagImage.style.height = 'auto';
+                    usflagImage.style.display = 'block';
+                    usflagImage.style.top = '380px'; // Adjust the top position as needed
+                    usflagImage.style.left = '540px'; // Adjust the left position as needed
+                    usflagImage.style.position = 'absolute';
+                    usflagImage.style.bottom = '0'; // Place at the bottom
+                    infoOverlay.appendChild(usflagImage);
+                } else {
+                    infoOverlay.style.display = 'none';
+        
+                    // Remove the image and text elements when hiding the overlay
+                    var imageElement = infoOverlay.querySelector('img');
+                    var helloText = infoOverlay.querySelector('div');
+                    if (imageElement) {
+                        infoOverlay.removeChild(imageElement);
+                    }
+                    if (helloText) {
+                        infoOverlay.removeChild(helloText);
+                    }
+        
+                    // Remove the additional images
+                    var usembImage = infoOverlay.querySelector('img[src="us_emb.png"]');
+                    if (usembImage) {
+                        infoOverlay.removeChild(usembImage);
+                    }
+        
+                    var uscoinImage = infoOverlay.querySelector('img[src="uscoin.png"]');
+                    if (uscoinImage) {
+                        infoOverlay.removeChild(uscoinImage);
+                    }
+        
+                    var usflagImage = infoOverlay.querySelector('img[src="usflag.png"]');
+                    if (usflagImage) {
+                        infoOverlay.removeChild(usflagImage);
+                    }
+                }
+            }
         </script>
+        
+        
+        
+        
+        
+        
+        
+        
     </a-scene>
 </body>
 </html>
