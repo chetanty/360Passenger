@@ -4,14 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>City Buttons</title>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
+
+
+    <style>
+        body {
+            background-color: #f0f0f0; /* Light Grey background */
+            margin: 0;
+            padding: 0;
+            text-align: center; /* Center-align content */
+            font-family: 'Orbitron', sans-serif; /* Orbitron font */
+
+        }
+
+        h1 {
+            color: #333; /* Dark Grey text color */
+        }
+
+        button {
+            background-color: #ddd; /* Light Grey button background */
+            color: #333; /* Dark Grey button text color */
+            padding: 10px;
+            margin: 5px;
+            width:300px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif; /* Orbitron font */
+            font-weight: bold;
+
+        }
+
+        button:hover {
+            background-color: #bbb; /* Slightly darker Grey on hover */
+        }
+
+        #header-img {
+            max-width: 30%; /* Adjust the percentage to control the width */
+            height: auto;
+            display: block;
+            margin: 20px auto; /* Adjust margin as needed */
+        }
+    </style>
 </head>
 <body>
+
+    <img id="header-img" src="c360.png" alt="City Image">
 
     <h1>Choose a City</h1>
 
     <button onclick="redirectTo('city_one.html')">London</button>
     <button onclick="redirectTo('city_two.html')">San Francisco</button>
     <button onclick="redirectTo('city_three.html')">Tokyo</button>
+    <button onclick="redirectTo('city_four.html')">Amsterdam</button>
+    <button onclick="redirectTo('city_five.html')">Montreal</button>
+    <button onclick="redirectTo('city_six.html')">Cairo</button>
 
     <script>
         function redirectTo(page) {
