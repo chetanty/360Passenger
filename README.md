@@ -1,7 +1,7 @@
 ![360P](c360.png)
 
 # 360Passenger
-Project for Hacked Beta 2023 by Chetan Tyagi.
+Project for MLH's Month Long Hackathon by Chetan Tyagi.
 
 ## Inspiration
 GeoGuessr and history serve as central inspirations for this project. The ability to look around adds a new level of immersiveness that normal photos cannot compete with.
