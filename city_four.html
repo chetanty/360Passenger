@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>360Passenger at Amsterdam</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
+    <link rel="icon" type="image/png" href="assets/CT29.png">
+
+</head>
+<body>
+    <div style="font-family: 'Orbitron', sans-serif; font-weight: bold; background-color: #f0f0f0; color: rgb(0, 0, 0); padding: 10px; text-align: center; font-size: 24px; position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; z-index: 10;">
+        <div style="padding-left: 10px;">
+            <a href="index.html" style="text-decoration: none; color: inherit;">&lt; Back</a>
+        </div>
+        <div style="flex-grow: 1;">
+            You are in Amsterdam, 1923
+        </div>
+        <div style="padding-right: 10px;">
+            <button onclick="toggleInfo()" style="border: none; background-color: inherit; font-family: 'Orbitron', sans-serif; font-size: 24px; color: rgb(0, 0, 0); cursor: pointer;font-weight: bold;">Info</button>
+        </div>
+        <div style="padding-right: 10px;">
+            <button onclick="toggleExtra()" style="border: none; background-color: inherit; font-family: 'Orbitron', sans-serif; font-size: 24px; color: rgb(0, 0, 0); cursor: pointer;font-weight: bold;">Extra</button>
+        </div>
+    </div>
+
+    <div id="infoOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 9;"></div>
+    <div id="infoOverlay2" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 9;"></div>
+
+    <a-scene vr-mode-ui="enabled: true">
+        <!-- Preload assets -->
+        <a-assets>
+            <img id="amsterdam" src="assets/amsterdam.png">
+        </a-assets>
+
+        <!-- Wrap the scene in an entity for better structure -->
+        <a-entity>
+            <!-- Set up the sky using the preloaded image -->
+            <a-sky src="#amsterdam" rotation="0 90 0"></a-sky>
+
+            <!-- Set up the camera for VR -->
+            <a-camera position="0 1.6 0" user-height="1.6" look-controls="reverseMouseDrag: true"></a-camera>
+
+            <!-- Add a 3D Earth model with a marker for Amsterdam -->
+            <a-globe radius="1" position="0 1 0" z-IN>
+                <a-entity
+                    position="0.5 0.1 -0.2"
+                    rotation="0 45 0"
+                    text="value: Amsterdam; align: center; color: white; wrapCount: 10;">
+                </a-entity>
+            </a-globe>
+        </a-entity>
+        <script src="scripts/script_four.js"></script>
+
+        
+        
+        
+        
+        
+        
+        
+        
+    </a-scene>
+</body>
+</html>
